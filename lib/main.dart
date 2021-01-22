@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Expense App'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.add),  
             onPressed: () => _startAddNewTransaction(context),
           ),
         ],
