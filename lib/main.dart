@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
                   fontSize: 18),
+
+                  button: TextStyle(color: Colors.white)
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -65,17 +67,25 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
 
     setState(() {
       _userTransactions.add(newTx);
     });
+  }
+
+  void deleteTransaction(String id){
+    setState(() {
+          _userTransactions.removeWhere((tx) {
+              return tx.id == id;
+          });
+        });
   }
 
   void _startAddNewTransaction(BuildContext ctx) {
@@ -93,9 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
-    return Scaffold(
-      appBar: AppBar(
+    var appBar = AppBar(
         title: Text('Expense App'),
         actions: <Widget>[
           IconButton(
@@ -103,14 +111,16 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () => _startAddNewTransaction(context),
           ),
         ],
-      ),
+      );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            Container(height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.4, child: Chart(_recentTransactions)),
+            Container(height: (MediaQuery.of(context).size.height - appBar.preferredSize.height  - MediaQuery.of(context).padding.top ) * 0.6 ,child: TransactionList(_userTransactions, deleteTransaction)),
           ],
         ),
       ),
