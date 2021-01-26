@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
                   fontSize: 18),
-
                   button: TextStyle(color: Colors.white)
             ),
         appBarTheme: AppBarTheme(
@@ -119,8 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.4, child: Chart(_recentTransactions)),
-            Container(height: (MediaQuery.of(context).size.height - appBar.preferredSize.height  - MediaQuery.of(context).padding.top ) * 0.6 ,child: TransactionList(_userTransactions, deleteTransaction)),
+            Container(height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.28, child: Chart(_recentTransactions)),
+            Container(height: (MediaQuery.of(context).size.height - appBar.preferredSize.height  - MediaQuery.of(context).padding.top ) * 0.62 ,child: TransactionList(_userTransactions, deleteTransaction)),
           ],
         ),
       ),
